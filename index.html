@@ -1,0 +1,107 @@
+<!-- lexicon. ------------  Celena Gu  -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles/main.css">
+
+    <title>lexicon.</title>
+</head>
+
+<body>
+    <!-- main landing page -->
+    <div class="primary-container">
+        <h1>lexicon.</h1>
+        <p>
+            a 
+            <a href="https://en.wikipedia.org/wiki/Lexicon">lexicon</a>
+            is the (complete set of meaningful inputs; internal vocabulary; catalogue of words) relating to a language, person(s), or subject.
+        </p>
+
+        <button>celena's lexicon</button>
+
+        
+    </div>
+
+    <!-- secondary page -->
+
+    <div class="secondary-container">
+        <h1>celena's lexicon</h1>
+
+        <!-- underneath title, main body -->
+        <div class="secondary-subcontainer">
+
+            <!-- left (word cloud) -->
+            <div class="left">
+
+
+            </div>
+
+            <!-- right (description) -->
+            <div class="right">
+                <div class>
+                    <p>clouds are mutable; <br> this page will change as time passes and celena's lexicon grows.</p>
+                    <p>last updated march 31, 2025</p>
+                </div>
+
+                <div class="description-container">
+
+                </div>
+
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+    <!-- <script type="module">
+        import {initGapiAndFetch} from './scripts/sheets-api.js';
+
+        window.gapiLoaded = () => {
+            gapi.load('client', () => {
+                initGapiAndFetch((values) => {
+                    const output = values.filter(row => row[0]).map(row => row.join(', ')).join('<br>');
+                    document.querySelector('.left').innerHTML = output;
+                });
+            });
+        };
+    </script> -->
+
+    <!-- move this into sheets-api.js -->
+    <script type="module">
+        import { initGapiAndFetch } from './scripts/sheets-api.js';
+      
+        // Dynamically load the GAPI script
+        const script = document.createElement('script');
+        script.src = 'https://apis.google.com/js/api.js';
+        script.async = true;
+        script.defer = true;
+        script.onload = () => {
+          console.log("GAPI script loaded");
+          gapi.load('client', () => {
+            initGapiAndFetch((values) => {
+              const output = values
+                .filter(row => row[0])
+                .map(row => row.join(', '))
+                .join('<br>');
+              document.querySelector('.left').innerHTML = output;
+            });
+          });
+        };
+        document.body.appendChild(script);
+      </script>
+
+    <!-- Load Google API script -->
+    <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+/* main.css */
+
+body {
+    background-image:url('../assets/images/test.jpg');
+
+    /* cover */
+    /* background-size: cover; */
+    background-attachment: fixed;
+
+    /* stretch */
+    background-size: 100% 100%;
+}
+
+/* .primary-container {
+
+} */
+
+.secondary-container {
+    background-color: aliceblue;
+}
+
+.secondary-subcontainer {
+    flex-direction: row;
+    display: flex;
+}
+
+.left {
+    /* background-color: lightblue; */
+    flex: 1;
+}
+
+.right {
+    /* background-color: lightcoral; */
+    flex: 1;
+}
