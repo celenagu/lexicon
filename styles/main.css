@@ -11,9 +11,22 @@ body {
     background-size: 100% 100%;
 }
 
-/* .primary-container {
+.primary-container {
+    background-color: lightgreen;
+}
 
-} */
+.primary-header, 
+.definition {
+    background-color: pink;
+    opacity: 1;
+    max-height: 100px;
+    transition: 
+        opacity 0.5s ease-in,
+        margin 1.0s ease-in 0.5s,
+        padding 1.0s ease-in 0.5s,
+        max-height 2.0s ease-in ;
+}
+
 
 .secondary-container {
     background-color: aliceblue;
@@ -33,3 +46,40 @@ body {
     /* background-color: lightcoral; */
     flex: 1;
 }
+
+#start-btn {
+    color: black;
+    border-color: black;
+    background-color: beige;
+    /* position: absolute; */
+    transition: 
+        color 0.5s ease, 
+        background-color 0.5s ease 0.5s,
+        border-color 0.5s ease 0.5s;
+}
+
+
+/* ========================= */
+/* Animations */
+/* ========================= */
+
+.fade-out {
+    /* opacity: 0; */
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    overflow: hidden;
+}
+
+
+/* Button */
+.move-button {
+    color: red;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+
+

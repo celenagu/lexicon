@@ -9,7 +9,7 @@ import { API_KEY } from "../secrets.js";
 
 const DISCOVERY_DOC = 'https://sheets.googleapis.com/$discovery/rest?version=v4';
 const SPREADSHEET_ID = '18y6RXhgfxD02iBzKMnwfrMINQbdMEOG7DrD8QmVr3sQ';
-const RANGE = 'Form Responses 1!B:B';
+const RANGE = 'Form Responses 1!A:C';
 
 // ======================
 // GAPI Utilities
@@ -41,43 +41,15 @@ export async function fetchSheetValues() {
     spreadsheetId: SPREADSHEET_ID,
     range: RANGE,
   });
-  return response.result.values || [];
+
+  const rows = response.result.values || [];
+
+  return rows.slice(1).map(row => ({
+    date: row[0] || '',
+    value: row[1] || '',
+    description: row[2] || ''
+  }));
 }
-
-
-// ======================
-// DOM & App Logic
-// ======================
-
-// // Upon GAPI load
-// async function bootstrapLexicon() {
-//   try {
-//     await loadGapiScript();
-//     console.log("GAPI script loaded.");
-
-//     gapi.load('client', async () => {
-//       await initGapiClient();
-//       const values = await fetchSheetValues();
-//       renderLexicon(values);
-//     });
-//   } catch(err) {
-//     console.error("Failed to initialize page: ", err);
-//     document.querySelector('.left').innerText = "Failed to load data."
-//   }
-// }
-
-// function renderLexicon(values) {
-//   const output = values
-//     .filter(row => row[0])
-//     .map(row => row.join(','))
-//     .join('<br>');
-//   const container = document.querySelector('.left');
-//   if (container) container.innerHTML = output;
-// }
-
-// ==================
-// Start rendering
-// bootstrapLexicon();
 
 
 
