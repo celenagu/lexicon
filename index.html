@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles/main.css">
 
+
     <title>lexicon.</title>
 </head>
 
@@ -35,7 +36,10 @@
 
             <!-- left (word cloud) -->
             <div class="left">
+                <div id="wordcloud-container">
+                    
 
+                </div>
 
             </div>
 
@@ -59,49 +63,8 @@
 
     </div>
 
-
-
-
-    <!-- <script type="module">
-        import {initGapiAndFetch} from './scripts/sheets-api.js';
-
-        window.gapiLoaded = () => {
-            gapi.load('client', () => {
-                initGapiAndFetch((values) => {
-                    const output = values.filter(row => row[0]).map(row => row.join(', ')).join('<br>');
-                    document.querySelector('.left').innerHTML = output;
-                });
-            });
-        };
-    </script> -->
-
-    <!-- move this into sheets-api.js -->
-    <script type="module">
-        import { initGapiAndFetch } from './scripts/sheets-api.js';
-      
-        // Dynamically load the GAPI script
-        const script = document.createElement('script');
-        script.src = 'https://apis.google.com/js/api.js';
-        script.async = true;
-        script.defer = true;
-        script.onload = () => {
-          console.log("GAPI script loaded");
-          gapi.load('client', () => {
-            initGapiAndFetch((values) => {
-              const output = values
-                .filter(row => row[0])
-                .map(row => row.join(', '))
-                .join('<br>');
-              document.querySelector('.left').innerHTML = output;
-            });
-          });
-        };
-        document.body.appendChild(script);
-      </script>
-
-    <!-- Load Google API script -->
-    <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
-
+    <!-- JS Scripts -->
+    <script type="module" src="./scripts/main.js"></script>
 </body>
 
 </html>
