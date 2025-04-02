@@ -57,7 +57,6 @@ function waitForTransition(element) {
 
 async function main() { 
     const primaryHeader = document.querySelector('.primary-header');
-    const primaryContainer = document.querySelector('.primary-container');
     const definition = document.querySelector('.definition');
     const button = document.getElementById('start-btn');
 
@@ -87,7 +86,8 @@ async function main() {
             const rows = await fetchSheetValues();
             const values = rows.map(row => row.value);
 
-            renderWordcloudText(values);
+            // This overwrites the word cloud
+            // renderWordcloudText(values);
 
             const lastDate = convertDate(rows[rows.length-1].date);
 

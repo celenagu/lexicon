@@ -8,6 +8,18 @@ export function renderWordcloudText(values) {
     if (container) container.innerHTML = output;
 }
 
+const words = [
+    { text: 'JavaScript', size: 40 },
+    { text: 'CSS', size: 30 },
+    { text: 'Particles', size: 25 },
+    { text: 'React', size: 20 },
+    { text: 'Node.js', size: 35 },
+    { text: 'D3', size: 45 },
+];
+
+
+
+
 export function renderWordcloud(values) {
 
     anychart.onDocumentReady( function() {
