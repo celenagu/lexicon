@@ -1,5 +1,5 @@
 import {initGapiClient, fetchSheetValues, loadGapiScript} from './sheets-api.js';
-import {renderWordcloudText} from './wordcloud/render.js';
+import {renderWordcloud} from './wordcloud/render.js';
 // import { startScene } from './wordcloud/behaviour.js';
 
 function convertDate(date) {
@@ -60,7 +60,6 @@ async function main() {
     const definition = document.querySelector('.definition');
     const button = document.getElementById('start-btn');
 
-    // startScene();
     
     button.addEventListener('click', async() => {
         collapseElement(primaryHeader, true, 2600);
@@ -88,6 +87,13 @@ async function main() {
 
             // This overwrites the word cloud
             // renderWordcloudText(values);
+
+                // startScene();
+            renderWordcloud(values);
+
+            window.addEventListener('resize', function(event) {
+                renderWordcloud(values);
+            })
 
             const lastDate = convertDate(rows[rows.length-1].date);
 
