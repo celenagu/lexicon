@@ -71,7 +71,6 @@ export function renderWordcloud(words) {
 
     console.log("Rendering word cloud...");
     let layout = d3.layout.cloud()
-        // .spiral("rectangular")
         .size([rect.width, rect.height])
         .words(words.map(text => ({text,size: 10 + Math.random() * 60})))
         .padding(5)
