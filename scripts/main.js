@@ -1,8 +1,7 @@
 import {initGapiClient, fetchSheetValues, loadGapiScript} from './sheets-api.js';
-import {renderWordcloud, preprocessWords, mapVisuals} from './wordcloud/render.js';
-// import { startScene } from './wordcloud/behaviour.js';
+import {renderWordcloud} from './wordcloud/render.js';
 
-function convertDate(date) {
+export function convertDate(date) {
     const newDate = new Date(date);
 
     const formatted = `${newDate.toLocaleDateString(undefined, {
@@ -36,8 +35,12 @@ function collapseElement(element, hideAfter = true, duration = 500) {
 
 function secondaryTransition(button) {
     const blurbContainer = document.querySelector('.blurb-container');
-    button.style.fontSize = "40px";
+    const cloudContainer = document.querySelector('.left');
+
+    button.style.fontSize = "40px"; // transition button to 2ndary title
+
     blurbContainer.classList.add('fade-in');
+    cloudContainer.classList.add('fade-in');
 
 }
 
@@ -60,22 +63,17 @@ async function main() {
     const definition = document.querySelector('.definition');
     const button = document.getElementById('start-btn');
 
-    
+    // listen for clicks to "celena's lexicon"
     button.addEventListener('click', async() => {
         collapseElement(primaryHeader, true, 2600);
         collapseElement(definition, true, 2600);
         button.classList.add('clicked');
 
-        // render secondary page
+        // render secondary page    
         await waitForTransition(button);
         secondaryTransition(button);
 
     });
-
-
-
-
-
 
     try{
         await loadGapiScript();
@@ -83,18 +81,11 @@ async function main() {
         gapi.load('client', async () => {
             await initGapiClient();
             const rows = await fetchSheetValues();
-            const values = rows.map(row => row.value);
 
-            let mapData = preprocessWords(rows);
-
-            // This overwrites the word cloud
-            // renderWordcloudText(values);
-
-                // startScene();
-            renderWordcloud(mapData);
+            renderWordcloud(rows);
 
             window.addEventListener('resize', function() {
-                renderWordcloud(mapData);
+                renderWordcloud(rows);
             })
 
             const lastDate = convertDate(rows[rows.length-1].date);

@@ -1,5 +1,11 @@
 // wordcloud/render.js
 
+import { convertDate } from "../main.js";
+
+// ===========
+// Wordcloud
+// ===========
+
 // For debug
 export function renderWordcloudText(values) {
     const output = values
@@ -9,9 +15,8 @@ export function renderWordcloudText(values) {
     if (container) container.innerHTML = output;
 }
 
-const colors = ["#FF6B6B", "#4ECDC4", "#FFD93D", "#C7F464", "#556270"];
-
-export function preprocessWords(data) {
+// ensure duplicate word entries are consolidated
+function preprocessWords(data) {
     const wordMap = {};
 
     data.forEach(row => {
@@ -41,7 +46,8 @@ export function preprocessWords(data) {
     return grouped;
 }
 
-export function mapVisuals(data) {
+// compute date-dependent text styling
+function mapVisuals(data) {
     // sorted in order of newest -> oldest
     const sorted = [...data].sort((a, b) => new Date(b.mostRecentDate) - new Date(a.mostRecentDate))
 
@@ -70,8 +76,7 @@ export function mapVisuals(data) {
 
 }
 
-
-
+// draw wordcloud to DOM
 function drawToDOM(data) {
     console.log("Computed layout:", data);
 
@@ -95,8 +100,11 @@ function drawToDOM(data) {
         span.style.font = d.font;
         span.style.opacity = d.opacity;
 
+        // if word is clicked
         span.addEventListener("click", () => {
-        alert(`You clicked on: ${d.text}`);
+            console.log(d);
+            openEntriesContainer(d);
+        
         });
 
         container.appendChild(span);
@@ -104,12 +112,13 @@ function drawToDOM(data) {
 }
 
 
-
+// determine word placements
 export function renderWordcloud(data) {
     const container = document.querySelector(".wordcloud");
     const rect = container.getBoundingClientRect();
 
-    const visualWords = mapVisuals(data);
+    const rows = preprocessWords(data);
+    const visualWords = mapVisuals(rows);
 
     console.log("Rendering word cloud...");
     let layout = d3.layout.cloud()
@@ -121,9 +130,23 @@ export function renderWordcloud(data) {
         .font("Impact")
         .fontSize(d => d.size )
         .on("end", drawToDOM)
-
     
     layout.start();
- 
 }
 
+// ==========
+// Entries block
+// ==========
+
+function openEntriesContainer(word){
+    const container = document.getElementById('word-entries-container');
+    const title = document.getElementById('word-title');
+    const entries = document.getElementById('word-entries');
+
+
+    title.textContent = word.text;  
+    entries.innerHTML = word.entries.map(e => (
+        `<strong>${convertDate(e.date)}</strong><br>${e.description}`
+      )).join("<br><br>");    
+    container.classList.remove("hidden");
+}
