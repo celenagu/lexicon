@@ -85,13 +85,14 @@ body {
     color:black;
     user-select: none;
     cursor: pointer;
-    transform: scale(1);
-    transition: transform 0.2s;
+    /* transform: scale(1); */
+    transition: text-shadow 0.2s;
 }
 
 .word:hover {
-    transform: scale(1.1);
+    /* transform: scale(1.1); */
     z-index: 1;
+    text-shadow: 0 0 5px black;
 }
 
 
