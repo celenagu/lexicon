@@ -1,5 +1,13 @@
 /* main.css */
 
+html{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
 body {
     /* background-image:url('../assets/images/test.jpg'); */
 
@@ -9,73 +17,129 @@ body {
 
     /* stretch */
     background-size: 100% 100%;
+
+    height:100%;
+    display:flex;
+    flex-direction: column;
 }
 
 .primary-container {
-    background-color: lightgreen;
+    /* background-color: lightgreen; */
+    margin-bottom: 10px;
+    min-height: 80px;
+    flex-direction: column;
+    display: flex;
+
 }
 
 .primary-header, 
 .definition {
-    background-color: pink;
+    /* background-color: pink; */
     opacity: 1;
-    max-height: 100px;
     transition: 
-        opacity 0.5s ease-in,
-        margin 1.0s ease-in 0.5s,
-        padding 1.0s ease-in 0.5s,
-        max-height 2.0s ease-in ;
+        opacity 1.0s ease-in-out,
+        margin 1s ease-in-out 1.1s,
+        padding 1s ease-in-out 1.1s,
+        max-height 2.0s ease-in-out ;
+}
+
+.primary-header {
+    max-height: 72px;
+}
+
+.definition {
+    max-height: 36px;
 }
 
 
 .secondary-container {
     background-color: aliceblue;
+    flex-grow: 1;
 }
 
 .secondary-subcontainer {
+    /* background-color: blueviolet; */
+    height: 100%;
     flex-direction: row;
     display: flex;
 }
 
+/* Left Container */
 .left {
     /* background-color: lightblue; */
+    height:100%;
     flex: 1;
+    /* color: transparent; */
 }
 
+
+canvas {
+    /* background: red; */
+    width: 100%;
+    height: 100%;
+}
+
+
+
+/* Right Container */
 .right {
     /* background-color: lightcoral; */
     flex: 1;
 }
 
+.blurb-container{
+    opacity: 0;
+    transition: opacity 2.0s ease;
+}
+
+.blurb, .last-updated{
+    color: black;
+}
+
+/* Start Button */
 #start-btn {
     color: black;
     border-color: black;
     background-color: beige;
-    /* position: absolute; */
-    transition: 
-        color 0.5s ease, 
-        background-color 0.5s ease 0.5s,
-        border-color 0.5s ease 0.5s;
+    font-size: 20px;
+    align-self: flex-start;
+    margin-top: auto;
+
+    transition:  
+        color 2.0s ease,
+        background-color 2.0s ease,
+        border-color 2.0s ease,
+        font-size 2.0s ease;
+}
+
+#start-btn:hover {
+    background-color: rgb(65, 55, 13);
+
 }
 
 
 /* ========================= */
-/* Animations */
+/* Transition End States */
 /* ========================= */
 
 .fade-out {
     /* opacity: 0; */
     max-height: 0;
-    padding-top: 0;
+    padding-top: 10px;
     padding-bottom: 0;
-    margin-top: 0;
+    margin-top: 10px;
     margin-bottom: 0;
     overflow: hidden;
 }
 
+.fade-in {
+    opacity: 1;
+}
+
 
 /* Button */
-.move-button {
+#start-btn.clicked {
+    /* Override initial #start-btn styles (higher priority) */
     color: red;
     background-color: transparent;
     border-color: transparent;
