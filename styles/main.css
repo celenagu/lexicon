@@ -24,7 +24,7 @@ body {
     left: -1%;
     width: 102%;
     height: 102%;
-    background-image: url('../assets/images/test.jpg');
+    background-image: url('../assets/images/background.jpg');
     background-size: cover;
     background-position: center;
     filter: blur(3px);
@@ -360,9 +360,10 @@ p.cloud-text.hidden {
     font-family: "JetBrains Mono";
     flex:1;
     max-width: 30vw;
-    margin-top: 4vh;;
+    margin-top: 4vh;
+    margin-bottom: 4vh;
     padding: 4vh;
-    max-height: 27vh;
+    max-height: 22vh;
     overflow: auto;
     height: auto;
     transform: scale(1);
@@ -384,22 +385,18 @@ p.cloud-text.hidden {
     cursor: none;
 }
 
-.word-entries-container {
-    background-color: beige;
-    border: 2px solid rgb(112, 99, 98);
-    border-radius: 10px;
-}
+
 
 /* entries-container scrollbar styling */
 .entries-container::-webkit-scrollbar {
     width: 8px;
 }
 .entries-container::-webkit-scrollbar-track {
-    background: #f0e6d2;
+    background: #d2e2f0;
     border-radius: 999px;
 }
 .entries-container::-webkit-scrollbar-thumb {
-    background-color: #978a7c;
+    background-color: #7c8197;
     border-radius: 999px;
 }
 
