@@ -18,7 +18,7 @@ In reality, I'd love to create a 1:1 linked database of my mind, but unfortunate
 
 This project utilizes a modified version of Jason Davies' Word Cloud Layout algorithm [d3-cloud](https://github.com/jasondavies/d3-cloud) to calculate word positions within the layout. Unlike Davies' original project, which renders SVG `<text>` elements, this iteration uses `<span>` elements, allowing for more flexible styling and physics-based mouse interactions using DOM manipulation. 
 
-Words and their associated metadata (definitions, timestamps) are pulled from a connected Google Sheet using the Google Sheets API (via the GAPI client). This makes the content easy to update via a Google Form without the need to touch code. 
+Words and their associated metadata (notes, timestamps) are pulled from a connected Google Sheet using the Google Sheets API (via the GAPI client). This makes the content easy to update via a Google Form without the need to touch code. 
 
 The particles (words) animate, react to cursor movement, and can be toggled between drifting and stillness. 
 
