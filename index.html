@@ -6,6 +6,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
 
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
     <script src="https://cdn.jsdelivr.net/npm/d3-cloud/build/d3.layout.cloud.min.js"></script>
@@ -14,18 +17,50 @@
 </head>
 
 <body>
+
+    <div class="background"></div>
+
+    <!-- background assets -->
+    <!-- <div class="background-assets"> -->
+        <!-- Sentient Cloud -->
+        <div class="cloud-sentient-container">
+            <p class="cloud-text hidden" id="text-1">(pet the cloud?)</p>
+            <p class="cloud-text hidden" id="text-2"><br>you have gained their trust :)<br>they no longer fear you</p>
+            <img src="./assets/images/sentient-cloud-blush.png" class="cloud toggle-cloud blush hidden" id="cloud-sentient">
+            <img src="./assets/images/sentient-cloud.png" class="cloud toggle-cloud" id="cloud-sentient">
+            <img src="./assets/images/sentient-cloud.png" class="cloud glow hidden" id="cloud-sentient">
+        </div>
+
+        <!-- Other clouds -->
+        <div class="cloud1-container">
+            <img src="./assets/images/cloud1.png" class="clickable cloud1 transparent">
+        </div>
+        <div class="cloud2-container">
+            <img src="./assets/images/cloud2.png" class="clickable cloud2 transparent">
+        </div>
+        <div class="cloud3-container">
+            <img src="./assets/images/cloud3.png" class="clickable cloud3 transparent">
+        </div>
+
+        <!-- Bird -->
+        <div class="bird-container">
+            <img src="./assets/images/bird.png" class="clickable bird">
+        </div>
+
+    <!-- </div> -->
+
     <!-- main landing page -->
     <div class="primary-container">
-        <h1 class="primary-header">lexicon.</h1>
-        <p class="definition">
-            a 
-            <a href="https://en.wikipedia.org/wiki/Lexicon">lexicon</a>
-            is the (complete set of meaningful inputs; internal vocabulary; catalogue of words) relating to a language, person(s), or subject.
-        </p>
-
+        <div class="primary-content">
+            <p class="primary-header">lexicon</p>
+            <p class="definition">
+                a 
+                <a href="https://en.wikipedia.org/wiki/Lexicon">lexicon</a>
+                is the {complete set of meaningful inputs;<br> internal vocabulary; catalogue of words} relating to a<br> language, person(s), or subject.
+            </p>
+        </div>
         <button id="start-btn">celena's lexicon</button>
 
-        
     </div>
 
     <!-- secondary page -->
@@ -38,28 +73,21 @@
             <!-- left (word cloud) -->
             <div class="left">
                 <div class="wordcloud">
-
                 </div>
-
-
-
             </div>
 
             <!-- right (description) -->
             <div class="right">
                 <div class="blurb-container">
-                    <p class="blurb">clouds are mutable; <br> this page will change as time passes and celena's lexicon grows.</p>
-
-                    <div class="last-updated">
-
-                    </div>
+                    <p class="blurb">clouds are mutable; <br> this page will change as time passes <br>and celena's lexicon grows.</p>
+                    <div class="last-updated"></div>
+                    <div class="blurb-background"></div>
                 </div>
 
-                <button id="toggle-cloud">Toggle cloud</button>
-
                 <div id="word-entries-container" class="entries-container hidden">
-                    <h2 id="word-title">Test</h2>
-                    <u1 id="word-entries">hello</u1>
+                    <p id="word-title"></p>
+                    <u1 id="word-entries"></u1>
+                    <div class="word-entries-background"></div>
                 </div>
 
             </div>
@@ -70,6 +98,12 @@
 
 
     </div>
+
+    <!-- Audio -->
+    <audio src="./assets/sfx/duck.mp3" class="bird-audio"></audio>
+    <audio src="./assets/sfx/splat.mp3" class="cloud3-audio"></audio>
+    <audio src="./assets/sfx/squeak.mp3" class="cloud2-audio"></audio>
+    <audio src="./assets/sfx/yawn.mp3" class="cloud1-audio"></audio>
 
     <!-- JS Scripts -->
     <script type="module" src="./scripts/main.js"></script>

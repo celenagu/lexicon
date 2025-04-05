@@ -1,6 +1,7 @@
 // wordcloud/render.js
 
 import { convertDate } from "../main.js";
+import { registerParticle} from "./behaviour.js";
 
 // ===========
 // Wordcloud
@@ -46,6 +47,9 @@ function preprocessWords(data) {
     return grouped;
 }
 
+// Randomize fonts
+const fonts = [ "Times New Roman", "Jetbrains Mono", "Lucinda Console", "Monaco", "Garamond"];
+
 // compute date-dependent text styling
 function mapVisuals(data) {
     // sorted in order of newest -> oldest
@@ -55,10 +59,13 @@ function mapVisuals(data) {
     let length = sorted.length;
 
     // define styling
-    const minSize = 12;
-    const maxSize = 60;
 
-    const minOpacity = 0.3;
+    // screen based font scaling
+    const screenWidth = window.innerWidth;
+    const minSize = Math.max(12, screenWidth * 0.01);
+    const maxSize = Math.min(140, screenWidth * 0.06); 
+
+    const minOpacity = 0.5;
     const maxOpacity = 1.0;
 
 
@@ -68,13 +75,15 @@ function mapVisuals(data) {
         return {
             ...word,
             size: minSize + freshness * (maxSize - minSize),
-            opacity: minOpacity + freshness * (maxOpacity - minOpacity)
+            opacity: minOpacity + freshness * (maxOpacity - minOpacity),
+            fontFamily: fonts[Math.floor(Math.random()*fonts.length)]
         };
     });
 
     return mapped;
 
 }
+
 
 // draw wordcloud to DOM
 function drawToDOM(data) {
@@ -89,7 +98,7 @@ function drawToDOM(data) {
 
     data.forEach(d => {
         const span = document.createElement("span");
-        span.className = "word";
+        span.className = "word disabled";
         span.id = d.text;
         span.textContent = d.text;
 
@@ -97,12 +106,17 @@ function drawToDOM(data) {
         span.style.left = `${d.x + centerX - d.width / 2}px`;
         span.style.top = `${d.y + centerY - d.height / 2}px`;
         span.style.transform = `rotate(${d.rotate}deg)`;
-        span.style.font = d.font;
+        span.style.fontFamily = d.font;
         span.style.opacity = d.opacity;
 
+        // register each particle for movement
+        const x = d.x + centerX - d.width / 2;
+        const y = d.y + centerY - d.height / 2;
+        registerParticle(span, x, y);
+
         // if word is clicked
-        span.addEventListener("click", () => {
-            console.log(d);
+        span.addEventListener("click", (e) => {
+            e.stopPropagation(); // so clicking the word doesn't count as "outside"
             openEntriesContainer(d);
         
         });
@@ -127,7 +141,7 @@ export function renderWordcloud(data) {
         .padding(5)
         .rotate(function () {return ~~(Math.random() * 2) * 90})
         .rotate(0)
-        .font("Impact")
+        .font(d => d.fontFamily)
         .fontSize(d => d.size )
         .on("end", drawToDOM)
     
@@ -138,15 +152,30 @@ export function renderWordcloud(data) {
 // Entries block
 // ==========
 
-function openEntriesContainer(word){
+// Handles the entries block collapsing upon clicking outside
+function onClickOut(event) {
+    const container = document.querySelector(".entries-container");
+  
+    if (container && !container.contains(event.target)) {
+      // Clicked outside the container
+      console.log("Description box hidden");
+      container.classList.add("hidden");
+    }
+  }
+
+// render entries block upon clicking
+export function openEntriesContainer(word){
     const container = document.getElementById('word-entries-container');
     const title = document.getElementById('word-title');
     const entries = document.getElementById('word-entries');
 
-
+    // populates the block with information
     title.textContent = word.text;  
     entries.innerHTML = word.entries.map(e => (
         `<strong>${convertDate(e.date)}</strong><br>${e.description}`
       )).join("<br><br>");    
     container.classList.remove("hidden");
+    
+    window.addEventListener("click", onClickOut);
 }
+
