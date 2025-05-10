@@ -6,13 +6,13 @@ Small web experiment built with vanilla HTML, CSS, and Javascript.
 - Words scale based on recency: newer entries appear larger
 - Expandable entries: words are clickable to reveal related notes and timestamps
 - Live-updating content: words are pulled from a connected Google Sheet
-- Hidden knick-knacks here and there
+- Fun buttons!
 
 ## Background
 
-I realized recently that I don't really take the time to reflect on myself. My mind moves forward at a mile a minute; sometimes I dont even think in words, thoughts just fly through my mind. 
+I realized recently that I don't really know the ins and outs of my mind. 
 
-In reality, I'd love to create a 1:1 linked database of my mind, but unfortunately, I don't quite have the means nor the time to accomplish that... So this project is a mini representation of that idea, a collection of words, objects, and phrases that stick with me. 
+In reality, I'd love to create a 1:1 linked database of my brain, but unfortunately, I don't quite have the means nor the time to accomplish that... So this project is a mini representation of that idea, a collection of words, objects, and phrases that stick with me. 
 
 ## Implementation Notes
 
@@ -28,6 +28,6 @@ The particles (words) animate, react to cursor movement, and can be toggled betw
 - Practice working with APIs
 - Explore DOM-based animation
 
-## To Do When I Feel Like It
+## In the future
 - Link in personal website
 - Time-dependent background and theme rendering
